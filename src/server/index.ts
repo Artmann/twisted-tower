@@ -15,6 +15,8 @@ const app = express();
 const server = http.createServer(app);
 const io = webSocket(http);
 
+const port = process.env.PORT || '3000';
+
 app.use(
   express.static(resolve(appRoot.path, 'dist', 'public'))
 );
@@ -23,6 +25,6 @@ io.on('connection', function(socket){
   console.log('a user connected');
 });
 
-server.listen(3000, function(){
+server.listen(port, function(){
   console.log('Listening on *:3000');
 });
