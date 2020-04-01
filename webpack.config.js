@@ -14,7 +14,9 @@ module.exports = {
     path: resolve(__dirname, 'dist', 'public'),
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, 'src', 'client', 'index.ejs')
+    })
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js']

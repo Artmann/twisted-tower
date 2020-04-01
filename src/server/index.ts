@@ -4,16 +4,13 @@ import http from 'http';
 import { resolve } from 'path';
 import webSocket from 'socket.io';
 
-class Game {
+import Game from '../client/game';
 
-  tick(): void {
-
-  }
-}
+const games = [];
 
 const app = express();
 const server = http.createServer(app);
-const io = webSocket(http);
+const io = webSocket(server);
 
 const port = process.env.PORT || '3000';
 
@@ -22,7 +19,13 @@ app.use(
 );
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  const game = new Game();
+
+  game.addPlayer(socket);
+
+  game.start();
+
+  games.push(game);
 });
 
 server.listen(port, function(){
